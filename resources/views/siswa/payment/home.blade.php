@@ -26,10 +26,26 @@
           </div>
           <div>
             <p class="mb-1">Order Id : {{ $pay->order_id }}</p>
+            @if ($pay->transaction_status=='pending')
             <p class="mb-1">Status : <span class="badge badge-danger">{{ Str::upper($pay->transaction_status) }}</span></p>
+            @elseif ($pay->transaction_status=='settlement')
+            <p class="mb-1">Status : <span class="badge bg-success">{{ Str::upper($pay->transaction_status) }}</span></p>
+            @else
+            <p class="mb-1">Status : <span class="badge badge-dark">{{ Str::upper($pay->transaction_status) }}</span></p>
+            @endif
+
             <p class="mb-1">Type Pembayaran : {{ $pay->payment_type }}</p>
             <p class="mb-1 badge badge-warning">{{ $pay->status_message }}</p>
             <p class="mb-1 badge badge-info">{{ $pay->transaction_time }}</p>
+            <div style="display: inline-block">
+                <form action="{{ route('verifikasi', $pay->id) }}" method="POST" value="Go"
+                    onclick="return confirm('Apakah kamu yakin mau verifikasi Pembayaran?')">
+                    @csrf
+                    <button class="btn btn-info btn-sm" type="submit">
+                        Verifikasi Pembayaran
+                    </button>
+                </form>
+            </div>
           </div>
         </div>
     </div><!-- col -->

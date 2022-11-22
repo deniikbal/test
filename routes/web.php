@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestController;
+use App\Http\Controllers\CallbackController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -25,3 +26,6 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('test',[TestController::class,'index'])->name('test');
+Route::post('payments/midtrans-notification', [CallbackController::class, 'receive']);
+Route::post('verifikasi/{id}', [CallbackController::class, 'verifikasi'])->name('verifikasi');
+

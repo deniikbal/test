@@ -21,11 +21,11 @@ Route::middleware(['auth'])->group(function () {
     ->name('create.student');
     //Payment
     Route::get('payment/index', [App\Http\Controllers\Student\PaymentController::class,'payment'])->name('payment.index');
-    Route::get('/payment', [App\Http\Controllers\Student\PaymentController::class,'create'])->name('payment.create');
-    Route::post('/payment', [App\Http\Controllers\Student\PaymentController::class,'create_payment'])->name('payment');
+    Route::post('/payment', [App\Http\Controllers\Student\PaymentController::class,'create'])->name('payment.create');
+    Route::get('/confirm', [App\Http\Controllers\Student\PaymentController::class,'confirm'])->name('confirm');
+    Route::post('/createpayment/{id}', [App\Http\Controllers\Student\PaymentController::class,'create_payment'])->name('create_payment');
+    Route::post('verifikasi/{id}', [CallbackController::class, 'verifikasi'])->name('verifikasi');
 });
-
-Route::get('test',[TestController::class,'index'])->name('test');
 Route::post('payments/midtrans-notification', [CallbackController::class, 'receive']);
-Route::post('verifikasi/{id}', [CallbackController::class, 'verifikasi'])->name('verifikasi');
+
 

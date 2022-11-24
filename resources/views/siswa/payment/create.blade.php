@@ -1,29 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
-@php
-    $temp = App\Models\TempPayment::where('student_id', $student->id)->first();
-@endphp
  <div class="col-lg-8 mb-2">
         <div class="card bd-gray-500">
             <div class="card-body">
               <h6 class="card-subtitle mb-2">Payment Detail</h6>
                 <div class="p-3" style="background-color: #eee;">
                   <div class="d-flex justify-content-between mt-2">
-                    <span>Nama Calon Siswa</span> <span>{{ $temp->namestudent }}</span>
+                    <span>Nama Calon Siswa</span> <span>{{ $temppayment->namestudent }}</span>
                   </div>
                   <div class="d-flex justify-content-between mt-2">
-                    <span>Email</span> <span>{{ $temp->email }}</span>
+                    <span>Email</span> <span>{{ $temppayment->email }}</span>
                   </div>
                   <div class="d-flex justify-content-between mt-2">
-                    <span>No Hp</span> <span>{{ $temp->nohp }}</span>
+                    <span>No Hp</span> <span>{{ $temppayment->nohp }}</span>
                   </div>
                   <div class="d-flex justify-content-between mt-2">
-                    <span>Jenis Pembayaran</span> <span>{{ $temp->jenisbayar }}</span>
+                    <span>Jenis Pembayaran</span> <span>{{ $temppayment->jenisbayar }}</span>
                   </div>
                   <hr />
                   <div class="d-flex justify-content-between mt-2">
-                    <span>Nominal Pembayaran</span> <span> Rp. {{ $temp->nominal }}</span>
+                    <span>Nominal Pembayaran</span> <span> Rp. {{ $temppayment->nominal }}</span>
                   </div>
                 </div>
             </div>
@@ -38,7 +35,7 @@
         </div>
     </div>
 
-    <form action="" id="submit_form" method="POST">
+    <form action="{{ route('create_payment', $temppayment->id) }}" id="submit_form" method="POST">
     @csrf
     <input type="hidden" name="json" id="json_callback">
 </form>

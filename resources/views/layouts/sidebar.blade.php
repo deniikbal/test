@@ -1,5 +1,11 @@
 <ul class="nav nav-aside">
+
     <li class="nav-item active"><a href="{{ route('home') }}" class="nav-link"><i data-feather="shopping-bag"></i> <span>Biodata</span></a></li>
+    @php
+        $user = App\Models\User::query()
+        ->whereHas('student', fn($query)=> $query->where('user_id',Auth::user()->id))->first();
+    @endphp
+    @if ($user==!null)
     <li class="nav-item"><a href="{{ route('payment.index') }}" class="nav-link"><i data-feather="globe"></i> <span>Pembayaran</span></a></li>
     <li class="nav-item"><a href="dashboard-three.html" class="nav-link"><i data-feather="pie-chart"></i> <span>Cryptocurrency</span></a></li>
     <li class="nav-item"><a href="dashboard-four.html" class="nav-link"><i data-feather="life-buoy"></i> <span>Helpdesk Management</span></a></li>
@@ -29,4 +35,5 @@
     <li class="nav-label mg-t-25">User Interface</li>
     <li class="nav-item"><a href="../../components" class="nav-link"><i data-feather="layers"></i> <span>Components</span></a></li>
     <li class="nav-item"><a href="../../collections" class="nav-link"><i data-feather="box"></i> <span>Collections</span></a></li>
+    @endif
   </ul>

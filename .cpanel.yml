@@ -1,6 +1,6 @@
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/smabandung/ppdb/
+    - export DEPLOYPATH=/home/smabandung/ppdb2023/
     - /bin/cp -R app $DEPLOYPATH
     - /bin/cp -R resources $DEPLOYPATH
     - /bin/cp -R public $DEPLOYPATH

@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('temp_payments', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('student_id')->constrained();
+            $table->string('namestudent');
             $table->timestamps();
         });
     }

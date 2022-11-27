@@ -45,9 +45,13 @@
             <p class="mb-1 badge badge-warning">{{ $pay->status_message }}</p>
             <p class="mb-1 badge badge-info">{{ $pay->transaction_time }}</p>
             <div style="display: inline-block">
-                <a href="{{ $pay->pdf_url }}" class="btn btn-primary">
-                    Instruksi Pembayaran
+                @if ($pay->transaction_status=='pending')
+                <a href="{{ $pay->pdf_url }}" class="badge badge-primary">
+                    Download Instruksi Pembayaran
                 </a>
+                @else
+                @endif
+
             </div>
           </div>
         </div>

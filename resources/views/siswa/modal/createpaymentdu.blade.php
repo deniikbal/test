@@ -1,8 +1,8 @@
-<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="createpaymentdu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content tx-14">
         <div class="modal-header">
-          <h6 class="modal-title" id="exampleModalLabel">Create Payment</h6>
+          <h6 class="modal-title" id="exampleModalLabel">Tambah Pembayaran Daftar Ulang</h6>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -45,7 +45,6 @@
                     <label for="formGroupExampleInput2" class="d-block">Jenis Pembayaran</label>
                     <select class="custom-select @error('jenisbayar') is-invalid @enderror" name="jenisbayar">
                         <option value="">--Pilih--</option>
-                        <option value="tp">Titipan Pembayaran</option>
                         <option value="du">Daftar Ulang</option>
                     </select>
                     @error('jenisbayar')

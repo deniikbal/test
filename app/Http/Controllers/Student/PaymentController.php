@@ -17,8 +17,9 @@ class PaymentController extends Controller
         $student = Student::where('user_id', Auth::user()->id)->first();
         $payment = Payment::where('student_id', $student->id)->get();
         $countpayment = Payment::where('student_id', $student->id)->count();
-        $countpayment = Payment::where('student_id', $student->id)->count();
-        return view('siswa.payment.home', compact('student','payment','countpayment'));
+        $pending = Payment::where('student_id', $student->id)->where('jenisbayar', 'tp')->first();
+        //dd($pending);
+        return view('siswa.payment.home', compact('student','payment','countpayment','pending'));
     }
 
     public function create (Request $request)
@@ -66,6 +67,7 @@ class PaymentController extends Controller
     public function create_payment(Request $request, $id)
     {
         $json = json_decode($request->get('json'));
+        //dd($json);
         $student = Student::where('user_id', Auth::user()->id)->first();
         $temp = TempPayment::find($id);
         Payment::create([
@@ -81,6 +83,7 @@ class PaymentController extends Controller
             'payment_type' => $json->payment_type,
             'transaction_time' => $json->transaction_time,
             'status_message' => $json->status_message,
+            'pdf_url' => $json->pdf_url,
         ]);
         TempPayment::find($id)->delete();
         Toastr::success('Pembayaran Berhasil','success');

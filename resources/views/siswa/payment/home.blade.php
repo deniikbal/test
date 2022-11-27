@@ -8,9 +8,16 @@
             <li class="list-group-item bg-primary text-white">Klik tombol Tambah Pembayaran, Isi dengan nominal pembayaran.</li>
             <li class="list-group-item bg-primary text-white">harap di isi data.</li>
           </ul>
-          <a href="#modal1" class="btn btn-danger" data-toggle="modal">Tambah Pembayaran</a>
+          @if ($pending==null)
+          <a href="#createpaymenttp" class="btn btn-danger" data-toggle="modal">Tambah Pembayaran</a>
+          @include('siswa.modal.createpaymenttp')
+          @elseif ($pending->transaction_status=='pending')
+          @else
+          <a href="#createpaymentdu" class="btn btn-danger" data-toggle="modal">Tambah Pembayaran</a>
+          @include('siswa.modal.createpaymentdu')
+          @endif
         </div>
-        @include('siswa.modal.createpayment')
+
     </div>
 </div>
 @foreach ($payment as $pay)
@@ -38,13 +45,9 @@
             <p class="mb-1 badge badge-warning">{{ $pay->status_message }}</p>
             <p class="mb-1 badge badge-info">{{ $pay->transaction_time }}</p>
             <div style="display: inline-block">
-                <form action="{{ route('verifikasi', $pay->id) }}" method="POST" value="Go"
-                    onclick="return confirm('Apakah kamu yakin mau verifikasi Pembayaran?')">
-                    @csrf
-                    <button class="btn btn-info btn-sm" type="submit">
-                        Verifikasi Pembayaran
-                    </button>
-                </form>
+                <a href="{{ $pay->pdf_url }}" class="btn btn-primary">
+                    Instruksi Pembayaran
+                </a>
             </div>
           </div>
         </div>
